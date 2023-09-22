@@ -8,8 +8,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
-import Login from './pages/Login';
-import User from './pages/User';
 
 function App() {
   return (
@@ -18,8 +16,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/user/setting" element={<User />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -164,13 +164,12 @@ DROP TABLE IF EXISTS `member`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `member` (
   `id` bigint(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
+  `e-mail` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `nickname` varchar(255) DEFAULT NULL,
   `provider` varchar(10) NOT NULL,
-  `organization` varchar(255) DEFAULT NULL,
-  UNIQUE KEY `unq_member` (`email`,`provider`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `organization` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
