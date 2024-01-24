@@ -11,8 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.testcontainers.containers.MySQLContainer;
@@ -21,9 +23,10 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest
+@ComponentScan
 @Testcontainers
 @ActiveProfiles("test")
-@TestPropertySource("classpath:application.properties")
+@TestPropertySource("classpath:application-test.properties")
 public class LicensePreValidationSystemIT {
 
     @Container
@@ -34,13 +37,14 @@ public class LicensePreValidationSystemIT {
             .withInitScript("database_dump.sql")
             .waitingFor(Wait.forListeningPort());
 
-    @Value("${spring.datasource.url}")
+    @Value("${spring.datasource.url:}")
     private String dataSourceUrl;
 
-    @Value("${spring.datasource.username}")
+    @Autowired
+    @Value("${spring.datasource.username:}")
     private String dataSourceUsername;
 
-    @Value("${spring.datasource.password}")
+    @Value("${spring.datasource.password:}")
     private String dataSourcePassword;
 
     @BeforeAll

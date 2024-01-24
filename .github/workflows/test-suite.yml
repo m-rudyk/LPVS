@@ -34,7 +34,7 @@ jobs:
       run: mvn test
 
     - name: Run Integration Tests
-      run: mvn verify -Pintegration-tests
+      run: mvn test -Dtest="LicensePreValidationSystemIT"
 
     - name: Generate JaCoCo badge
       id: jacoco
