@@ -11,20 +11,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.MountableFile;
 
-@SpringBootTest
-@ComponentScan
+// @SpringBootTest
 @Testcontainers
+@DataJpaTest
 @ActiveProfiles("test")
 @TestPropertySource("classpath:application-test.properties")
 public class LicensePreValidationSystemIT {
@@ -34,17 +34,17 @@ public class LicensePreValidationSystemIT {
             .withDatabaseName("lpvs")
             .withUsername("root")
             .withPassword("test")
-            .withInitScript("database_dump.sql")
+            // .withInitScript("database_dump.sql")
+            // .withCopyFileToContainer(MountableFile.forClasspathResource("database_dump.sql"), "/docker-entrypoint-initdb.d/database_dump.sql")
             .waitingFor(Wait.forListeningPort());
 
-    @Value("${spring.datasource.url:}")
+    @Value("${spring.datasource.url}")
     private String dataSourceUrl;
 
-    @Autowired
-    @Value("${spring.datasource.username:}")
+    @Value("${spring.datasource.username}")
     private String dataSourceUsername;
 
-    @Value("${spring.datasource.password:}")
+    @Value("${spring.datasource.password}")
     private String dataSourcePassword;
 
     @BeforeAll
